@@ -19,6 +19,11 @@ class LaravelLinode
         return $response->json();
     }
 
+    public function getKey(): string
+    {
+        return config('linode.key');
+    }
+
     protected function request(): PendingRequest
     {
         return Http::withToken(config('linode.key'))->baseUrl('https://api.linode.com/v4');

@@ -13,7 +13,7 @@ class LaravelLinode
         $response = $this->request()->get('/account');
 
         if (!$response->successful()) {
-            throw new LinodeApiException($response->json());
+            throw LinodeApiException::make($response->json());
         }
 
         return $response->json();

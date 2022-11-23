@@ -4,6 +4,7 @@ namespace Sabuto\LaravelLinode;
 
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
+use Sabuto\LaravelLinode\Exceptions\LinodeApiException;
 
 class LaravelLinode
 {
@@ -12,7 +13,7 @@ class LaravelLinode
         $response = $this->request()->get('/account');
 
         if (!$response->successful()) {
-            throw new \Exception($response->json('message'));
+            throw new LinodeApiException($response->json('message'));
         }
 
         return $response->json();

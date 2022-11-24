@@ -8,7 +8,7 @@ class LinodeApiException extends \Exception
 {
     public static function make(array $errors): self
     {
-        $col = collect($errors);
+        $col = collect(Arr::flatten($errors));
         dd($col);
         return new self($error);
     }

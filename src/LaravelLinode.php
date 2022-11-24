@@ -10,7 +10,7 @@ class LaravelLinode
 {
     public function test(): mixed
     {
-        $response = $this->request()->get('/account');
+        $response = $this->request()->get('/account/invoices');
 
         if (!$response->successful()) {
             throw LinodeApiException::make($response->json());

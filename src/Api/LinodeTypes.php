@@ -18,4 +18,15 @@ trait LinodeTypes
 
         return $response->json();
     }
+
+    public function typesView($typeId)
+    {
+        $response = $this->request()->get("/linode/types/{$typeId}");
+
+        if (!$response->successful()) {
+            throw LinodeApiException::make($response->json());
+        }
+
+        return $response->json();
+    }
 }

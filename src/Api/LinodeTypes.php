@@ -12,7 +12,7 @@ trait LinodeTypes
     {
         $response = $this->request()->get('/linode/types');
 
-        if (!$response->successful()) {
+        if (! $response->successful()) {
             throw LinodeApiException::make($response->json());
         }
 
@@ -23,7 +23,7 @@ trait LinodeTypes
     {
         $response = $this->request()->get("/linode/types/{$typeId}");
 
-        if (!$response->successful()) {
+        if (! $response->successful()) {
             throw LinodeApiException::make($response->json());
         }
 

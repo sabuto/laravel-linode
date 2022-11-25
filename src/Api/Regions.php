@@ -2,7 +2,6 @@
 
 namespace Sabuto\LaravelLinode\Api;
 
-use PHPUnit\Framework\MockObject\Api;
 use Sabuto\LaravelLinode\Exceptions\LinodeApiException;
 
 trait Regions
@@ -13,7 +12,7 @@ trait Regions
     {
         $response = $this->request()->get('/regions');
 
-        if (!$response->successful()) {
+        if (! $response->successful()) {
             throw LinodeApiException::make($response->json());
         }
 
@@ -24,7 +23,7 @@ trait Regions
     {
         $response = $this->request()->get("/regions/{$regionId}");
 
-        if (!$response->successful()) {
+        if (! $response->successful()) {
             throw LinodeApiException::make($response->json());
         }
 

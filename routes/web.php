@@ -13,7 +13,7 @@ Route::prefix('linode')->group(function () {
             'client_secret' => config('linode.client_secret')
         ]);
 
-        dd($response);
+        dd($response->json());
     });
 
     Route::get('/authorise', function () {

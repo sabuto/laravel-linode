@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('linode')->group(function () {
     Route::get('/callback', function (Request $request) {
-        $response = Http::post("https://login.linode.com/oath/token", [
+        $response = Http::asForm()->post("https://login.linode.com/oath/token", [
             'code' => $request->code,
             'client_id' => config('linode.client_id'),
             'client_secret' => config('linode.client_secret')

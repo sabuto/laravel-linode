@@ -11,12 +11,11 @@ Route::prefix('linode')->group(function () {
     });
 
     Route::get('/authorise', function (){
-        $req = Http::post('https://login.linode.com/oauth/authorize',[
-            'client_id' => config('linode.client_id'),
-            'response_type' => 'code',
-            'scopes' => 'linodes:read_write'
-        ]);
+        $c = config('linode.client_id');
+        $r = 'code';
+        $scopes = 'linodes:read_write';
 
-        dd($req);
+        return redirect("https://login.linode.com/oauth/authorize?client_id={$c}&response_type={$r}&scopes={$scopes}");
     });
+
 });

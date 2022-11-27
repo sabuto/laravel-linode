@@ -18,7 +18,7 @@ class LaravelLinodeServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-linode')
             ->hasConfigFile()
-            ->hasRoutes(__DIR__ . '../routes/web.php')
+            ->hasRoute(__DIR__ . '../routes/web.php')
             ->hasCommand(LaravelLinodeCommand::class);
     }
 }

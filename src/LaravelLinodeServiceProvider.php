@@ -22,6 +22,11 @@ class LaravelLinodeServiceProvider extends PackageServiceProvider
             ->hasRoute('web')
             ->hasMigration('create_linode_keys_table')
             ->hasCommand(LaravelLinodeCommand::class)
-            ->runsMigrations();
+            ->runsMigrations()
+            ->hasInstallCommand(function (InstallCommand $command) {
+                $command->publishMigrations()
+                    ->askToRunMigrations()
+                    ->askToStarRepoOnGitHub('sabuto/laravel-linode');
+            });
     }
 }

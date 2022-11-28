@@ -27,12 +27,12 @@ class Linode extends Model
         return (bool)$author->owner()->save($linode);
     }
 
-    public function updateLinode($id, $data): bool
+    public function updateLinode(string|int $id, array $data): bool
     {
         return (bool)static::find($id)->update($data);
     }
 
-    public function deleteLinode($id): bool
+    public function deleteLinode(string|int $id): bool
     {
         return (bool)static::find($id)->delete();
     }

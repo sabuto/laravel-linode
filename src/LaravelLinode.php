@@ -16,8 +16,13 @@ class LaravelLinode
     {
     }
 
-    public function delete($id)
+    public function delete(string $id): bool
     {
-        $this->linode->deleteLinode($id);
+        return $this->linode->deleteLinode($id);
+    }
+
+    public function update(string $id, array $data): bool
+    {
+        return $this->linode->updateLinode($id, $data);
     }
 }

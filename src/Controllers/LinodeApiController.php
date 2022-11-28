@@ -11,6 +11,7 @@ class LinodeApiController extends Controller
 {
     public function authorise(Collection $scopes)
     {
+        dd('hello');
         $base_url = 'https://login.linode.com/oauth/authorize?';
         $config = config('linode.client_id');
         $response = 'code';

@@ -17,6 +17,7 @@ Route::prefix('linode')->group(function () {
     });
 
     Route::get('/authorise', function () {
+        dd('tes');
         $c = config('linode.client_id');
         $r = 'code';
         $scopes = 'linodes:read_write';

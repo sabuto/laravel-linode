@@ -3,6 +3,7 @@
 namespace Sabuto\LaravelLinode;
 
 use Sabuto\LaravelLinode\Commands\LaravelLinodeCommand;
+use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -21,6 +22,9 @@ class LaravelLinodeServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasRoute('web')
             ->hasMigration('create_linode_keys_table')
-            ->hasCommand(LaravelLinodeCommand::class);
+            ->hasCommand(LaravelLinodeCommand::class)
+        ->hasInstallCommand(function (InstallCommand $command) {
+            $command->askToRunMigrations();
+        });
     }
 }

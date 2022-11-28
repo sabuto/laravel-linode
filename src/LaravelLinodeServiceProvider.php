@@ -19,7 +19,7 @@ class LaravelLinodeServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-linode')
             ->hasConfigFile()
-            ->hasRoute('web')
+            ->hasRoute('api')
             ->hasMigration('create_linode_keys_table')
             ->hasCommand(LaravelLinodeCommand::class)
             ->runsMigrations()

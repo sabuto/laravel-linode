@@ -9,16 +9,13 @@ use Illuminate\Support\Facades\Http;
 
 class LinodeApiController extends Controller
 {
-    public function authorise($scopes)
+    public function authorise()
     {
-        $base_url = 'https://login.linode.com/oauth/authorize?';
         $config = config('linode.client_id');
         $response = 'code';
-        $test = collect($scopes);
-        dd($test);
-        $scopes->each(function ($item, $key) {
-            echo $item . ' ' . $key;
-        });
+        $scopes = 'linodes:read_write,nodebalancers:read_write,volumes:read_write';
+
+        return redirect("https://login.linode.com/oauth/authorize?client_id={$config}&response_type={$response}&scopes={$scopes}");
     }
 
     public function callback(Request $request)

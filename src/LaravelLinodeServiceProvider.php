@@ -14,11 +14,13 @@ class LaravelLinodeServiceProvider extends PackageServiceProvider
          * This class is a Package Service Provider
          *
          * More info: https://github.com/spatie/laravel-package-tools
+         * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
             ->name('laravel-linode')
             ->hasConfigFile()
             ->hasRoute('web')
+            ->hasMigration('create_linode_keys_table')
             ->hasCommand(LaravelLinodeCommand::class);
     }
 }

@@ -31,4 +31,16 @@ class LinodeApiController extends Controller
 
         return redirect(config('linode.redirect_after_keys'));
     }
+
+    public function refresh(string $token)
+    {
+        $response = Http::post('https://login.linode.com/oauth/token', [
+            'grant_type' => 'refresh_token',
+            'client_id' => config('linode.client_id'),
+            'client_secret' => config('linode.client_secret'),
+            'refresh_token' => $token
+        ]);
+
+        dd($response->json());
+    }
 }

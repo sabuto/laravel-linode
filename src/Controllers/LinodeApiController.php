@@ -29,6 +29,6 @@ class LinodeApiController extends Controller
 
         event(new LinodeKeysRecieved($response->json()));
 
-        dd($response->json());
+        return redirect(config('linode.redirect_after_keys'));
     }
 }

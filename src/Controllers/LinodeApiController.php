@@ -34,7 +34,7 @@ class LinodeApiController extends Controller
 
     public function refresh(string $token)
     {
-        $response = Http::post('https://login.linode.com/oauth/token', [
+        $response = Http::asForm()->post('https://login.linode.com/oauth/token', [
             'grant_type' => 'refresh_token',
             'client_id' => config('linode.client_id'),
             'client_secret' => config('linode.client_secret'),

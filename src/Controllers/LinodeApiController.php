@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
+use Sabuto\LaravelLinode\Events\LinodeKeysRecieved;
 
 class LinodeApiController extends Controller
 {
@@ -25,6 +26,8 @@ class LinodeApiController extends Controller
             'client_id' => config('linode.client_id'),
             'client_secret' => config('linode.client_secret')
         ]);
+
+        event(new LinodeKeysRecieved($response->json()));
 
         dd($response->json());
     }

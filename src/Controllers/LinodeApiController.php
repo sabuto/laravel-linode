@@ -27,7 +27,7 @@ class LinodeApiController extends Controller
             'client_secret' => config('linode.client_secret')
         ]);
 
-        event(new LinodeKeysRecieved($response->json()));
+        event(new LinodeKeysRecieved($response->json(), auth()->user()->id));
 
         dd($response->json());
     }

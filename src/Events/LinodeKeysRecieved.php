@@ -9,7 +9,7 @@ class LinodeKeysRecieved
 {
     use Dispatchable, SerializesModels;
 
-    public function __construct(public mixed $data)
+    public function __construct(public mixed $data, public mixed $id)
     {
 
     }

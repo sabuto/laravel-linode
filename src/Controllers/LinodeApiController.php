@@ -29,7 +29,11 @@ class LinodeApiController extends Controller
             'client_secret' => config('linode.client_secret')
         ]);
 
-        event(new LinodeKeysRecieved($response->json()));
+        $json = $response->json();
+
+        event(new LinodeKeysRecieved($json));
+
+        RefreshLinodeToken::dispatch($json)->delay(now()->addSeconds($json['expires_in']));
 
         return redirect(config('linode.redirect_after_keys'));
     }

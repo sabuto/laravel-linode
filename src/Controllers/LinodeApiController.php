@@ -41,6 +41,8 @@ class LinodeApiController extends Controller
             'refresh_token' => $token
         ]);
 
-        dd($response->json());
+        dd($response);
+
+        return response($response->json(), 200);
     }
 }

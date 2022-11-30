@@ -16,17 +16,6 @@ class Linode extends Model
         return $this->morphTo();
     }
 
-    public function createLinode(Model $author, array $data): bool
-    {
-        $linode = new static();
-        $linode->fill(array_merge($data, [
-            'owner_id' => $author->id,
-            'owner_type' => get_class($author),
-        ]));
-
-        return (bool) $author->owner()->save($linode);
-    }
-
     public function updateLinode(string|int $id, array $data): bool
     {
         return (bool) static::find($id)->update($data);

@@ -33,7 +33,7 @@ class LinodeApiController extends Controller
 
         event(new LinodeKeysRecieved($json));
 
-        RefreshLinodeToken::dispatch($json)->delay(now()->addSeconds($json['expires_in']));
+        RefreshLinodeToken::dispatch($json)->delay(now()->addMinute());
 
         return redirect(config('linode.redirect_after_keys'));
     }
@@ -53,7 +53,7 @@ class LinodeApiController extends Controller
 
         $json = $response->json();
 
-        RefreshLinodeToken::dispatch($response->json())->delay(now()->addSeconds($json['expires_in']));
+        RefreshLinodeToken::dispatch($response->json())->delay(now()->addMinute());
 
         return response($json, 200);
     }

@@ -21,19 +21,19 @@ class Linode extends Model
         $linode = new static();
         $linode->fill(array_merge($data, [
             'owner_id' => $author->id,
-            'owner_type' => get_class($author)
+            'owner_type' => get_class($author),
         ]));
 
-        return (bool)$author->owner()->save($linode);
+        return (bool) $author->owner()->save($linode);
     }
 
     public function updateLinode(string|int $id, array $data): bool
     {
-        return (bool)static::find($id)->update($data);
+        return (bool) static::find($id)->update($data);
     }
 
     public function deleteLinode(string|int $id): bool
     {
-        return (bool)static::find($id)->delete();
+        return (bool) static::find($id)->delete();
     }
 }

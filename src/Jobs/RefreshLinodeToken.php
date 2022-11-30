@@ -16,7 +16,6 @@ class RefreshLinodeToken implements ShouldQueue
 
     public function __construct(public mixed $data)
     {
-
     }
 
     public function handle()

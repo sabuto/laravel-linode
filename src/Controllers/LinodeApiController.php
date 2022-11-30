@@ -4,7 +4,6 @@ namespace Sabuto\LaravelLinode\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Sabuto\LaravelLinode\Events\LinodeKeysRecieved;
 use Sabuto\LaravelLinode\Exceptions\LinodeApiException;
@@ -23,17 +22,17 @@ class LinodeApiController extends Controller
 
     public function callback(Request $request)
     {
-        $response = Http::asForm()->post("https://login.linode.com/oauth/token", [
+        $response = Http::asForm()->post('https://login.linode.com/oauth/token', [
             'code' => $request->code,
             'client_id' => config('linode.client_id'),
-            'client_secret' => config('linode.client_secret')
+            'client_secret' => config('linode.client_secret'),
         ]);
 
         $json = $response->json();
 
         event(new LinodeKeysRecieved($json));
 
-        RefreshLinodeToken::dispatch($json)->delay(now()->addSeconds($json['expires_in']-60));
+        RefreshLinodeToken::dispatch($json)->delay(now()->addSeconds($json['expires_in'] - 60));
 
         return redirect(config('linode.redirect_after_keys'));
     }
@@ -44,16 +43,16 @@ class LinodeApiController extends Controller
             'grant_type' => 'refresh_token',
             'client_id' => config('linode.client_id'),
             'client_secret' => config('linode.client_secret'),
-            'refresh_token' => $token
+            'refresh_token' => $token,
         ]);
 
-        if (!$response->successful()) {
+        if (! $response->successful()) {
             throw new LinodeApiException("Can't refresh token, you need to reauthorise");
         }
 
         $json = $response->json();
 
-        RefreshLinodeToken::dispatch($response->json())->delay(now()->addSeconds($json['expires_in']-60));
+        RefreshLinodeToken::dispatch($response->json())->delay(now()->addSeconds($json['expires_in'] - 60));
 
         return response($json, 200);
     }

@@ -11,6 +11,5 @@ class LinodeKeysRecieved
 
     public function __construct(public mixed $data)
     {
-
     }
 }

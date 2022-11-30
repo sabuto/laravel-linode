@@ -8,6 +8,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Sabuto\LaravelLinode\Events\LinodeKeysRecieved;
 use Sabuto\LaravelLinode\Exceptions\LinodeApiException;
+use Sabuto\LaravelLinode\Jobs\RefreshLinodeToken;
 
 class LinodeApiController extends Controller
 {
@@ -42,11 +43,14 @@ class LinodeApiController extends Controller
             'refresh_token' => $token
         ]);
 
-        if(!$response->successful())
-        {
+        if (!$response->successful()) {
             throw new LinodeApiException("Can't refresh token, you need to reauthorise");
         }
 
-        return response($response->json(), 200);
+        $json = $response->json();
+
+        RefreshLinodeToken::dispatch($response->json())->delay(now()->addSeconds($json['expires_in']));
+
+        return response($json, 200);
     }
 }

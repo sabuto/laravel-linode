@@ -7,6 +7,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Http;
+use Sabuto\LaravelLinode\Events\LinodeKeysRecieved;
 
 class RefreshLinodeToken implements ShouldQueue
 {
@@ -19,6 +21,8 @@ class RefreshLinodeToken implements ShouldQueue
 
     public function handle()
     {
+        $response = Http::get(route('linode.refresh', ['token' => $this->data['refresh_token']]));
 
+        event(new LinodeKeysRecieved($response->json()));
     }
 }
